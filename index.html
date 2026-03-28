@@ -42,11 +42,10 @@
         }
 
         .ticket-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
         }
         .ticket-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         }
 
         .payment-method {
@@ -81,7 +80,7 @@
                 </div>
             </div>
             <div class="hidden md:block text-right">
-                <div class="text-sm font-bold text-stone-600">更新日期: 2026.03.28</div>
+                <div class="text-sm font-bold text-stone-600">更新日期: 2026.03.27</div>
                 <div class="text-xs text-green-600 flex items-center justify-end">
                     <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
                     服務正常運作中
@@ -102,7 +101,7 @@
         <!-- 概覽 -->
         <section id="sec-overview" class="block animate-fade-in">
             
-            <!-- 實時站頭看板 -->
+            <!-- 實時站頭看板 (新增功能) -->
             <div class="dashboard-card rounded-3xl p-6 mb-8 text-white shadow-xl">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
                     <h2 class="text-xl font-bold flex items-center mb-2 md:mb-0">
@@ -149,17 +148,17 @@
                         往返 <strong>NAPA</strong> 與 <strong>屯門 V city</strong> 的接駁巴士票價已根據支付方式與路段進行調整，請留意最新收費標準。
                     </p>
                     <div class="flex flex-wrap gap-3">
-                        <div class="bg-green-100 p-3 rounded-2xl border border-green-200">
-                            <span class="block text-xs font-bold text-green-700">任何站點 (成人車票)</span>
-                            <span class="text-xl font-black text-green-900">$5.0</span>
+                        <div class="bg-amber-100 p-3 rounded-2xl">
+                            <span class="block text-xs font-bold text-amber-600">任何站點 (成人車票)</span>
+                            <span class="text-xl font-black text-amber-800">$5.0</span>
                         </div>
-                        <div class="bg-blue-100 p-3 rounded-2xl border border-blue-200">
-                            <span class="block text-xs font-bold text-blue-700">任何站點 (特惠車票)</span>
-                            <span class="text-xl font-black text-blue-900">$3.0</span>
+                        <div class="bg-blue-100 p-3 rounded-2xl">
+                            <span class="block text-xs font-bold text-blue-600">黃金海岸 (八達通)</span>
+                            <span class="text-xl font-black text-blue-800">$4.5</span>
                         </div>
                         <div class="bg-stone-100 p-3 rounded-2xl">
-                            <span class="block text-xs font-bold text-stone-600">八達通 (全程/黃金海岸)</span>
-                            <span class="text-lg font-black text-stone-800">$7.0 / $4.5</span>
+                            <span class="block text-xs font-bold text-stone-600">全程/三聖 (八達通)</span>
+                            <span class="text-xl font-black text-stone-800">$7.0</span>
                         </div>
                     </div>
                 </div>
@@ -171,7 +170,7 @@
                         <p class="text-stone-300 text-sm leading-relaxed mb-4">
                             如需往返屯門站、三聖或黃金海岸，<strong>預先購買車票</strong>可享 $5 成人及 $3 特惠優惠價（去程及回程均適用）；若直接拍八達通則不設特惠折扣。
                         </p>
-                        <button onclick="switchTab('tickets')" class="text-xs font-bold underline underline-offset-4 text-stone-100 hover:text-white">查看詳細收費表及車票圖鑑 →</button>
+                        <button onclick="switchTab('tickets')" class="text-xs font-bold underline underline-offset-4 text-stone-100 hover:text-white">查看詳細收費表 →</button>
                     </div>
                     <div class="absolute -right-4 -bottom-4 text-8xl opacity-10">🎟️</div>
                 </div>
@@ -282,52 +281,56 @@
         <section id="sec-locations" class="hidden animate-fade-in">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-stone-800">上落客位置導覽</h2>
-                <p class="text-stone-500 mt-2">請點擊下方地點了解詳細上車位置。</p>
+                <p class="text-stone-500 mt-2">請點擊下方地點了解詳細上車位置。您可以於日後加入實景相片。</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Location Cards -->
                 <div class="bg-white rounded-3xl p-6 shadow-sm border border-stone-100 flex flex-col sm:flex-row gap-4">
                     <div class="w-full sm:w-24 h-24 bg-blue-100 rounded-2xl flex items-center justify-center shrink-0 text-3xl overflow-hidden relative">
                         🚉
+                        <!-- <img src="assets/vcity_station.jpg" alt="V city 站頭" class="absolute inset-0 w-full h-full object-cover"> -->
                     </div>
                     <div>
                         <h4 class="font-bold text-blue-900 text-lg">V city (屯門站)</h4>
                         <p class="text-xs text-stone-500 mt-1 mb-2">地面公共運輸交匯處過境巴士站 (近出口)</p>
                         <div class="flex gap-2 flex-wrap">
-                            <span class="payment-method bg-green-50 text-green-700 border border-green-200">接受車票 ($5/$3)</span>
-                            <span class="payment-method bg-stone-100 text-stone-600">八達通 ($7)</span>
+                            <span class="payment-method bg-stone-100 text-stone-600">接受車票 ($5/$3)</span>
+                            <span class="payment-method bg-blue-50 text-blue-600">八達通 ($7)</span>
                         </div>
                     </div>
                 </div>
                 <div class="bg-white rounded-3xl p-6 shadow-sm border border-stone-100 flex flex-col sm:flex-row gap-4">
                     <div class="w-full sm:w-24 h-24 bg-amber-100 rounded-2xl flex items-center justify-center shrink-0 text-3xl overflow-hidden relative">
                         🦐
+                        <!-- <img src="assets/sam_shing.jpg" alt="三聖邨站頭" class="absolute inset-0 w-full h-full object-cover"> -->
                     </div>
                     <div>
                         <h4 class="font-bold text-amber-900 text-lg">三聖邨</h4>
                         <p class="text-xs text-stone-500 mt-1 mb-2">青山公路-青山灣段 (近三聖邨候車位置)</p>
                         <div class="flex gap-2 flex-wrap">
-                            <span class="payment-method bg-green-50 text-green-700 border border-green-200">接受車票 ($5/$3)</span>
-                            <span class="payment-method bg-stone-100 text-stone-600">八達通 ($7)</span>
+                            <span class="payment-method bg-stone-100 text-stone-600">接受車票 ($5/$3)</span>
+                            <span class="payment-method bg-blue-50 text-blue-600">八達通 ($7)</span>
                         </div>
                     </div>
                 </div>
                 <div class="bg-white rounded-3xl p-6 shadow-sm border border-stone-100 flex flex-col sm:flex-row gap-4">
                     <div class="w-full sm:w-24 h-24 bg-cyan-100 rounded-2xl flex items-center justify-center shrink-0 text-3xl overflow-hidden relative">
                         🌊
+                        <!-- <img src="assets/gold_coast.jpg" alt="黃金海岸站頭" class="absolute inset-0 w-full h-full object-cover"> -->
                     </div>
                     <div>
                         <h4 class="font-bold text-cyan-900 text-lg">黃金海岸商場</h4>
                         <p class="text-xs text-stone-500 mt-1 mb-2">鄉村俱樂部旁穿梭巴士站</p>
                         <div class="flex gap-2 flex-wrap">
-                            <span class="payment-method bg-green-50 text-green-700 border border-green-200">接受車票 ($5/$3)</span>
-                            <span class="payment-method bg-blue-50 text-blue-600 border border-blue-200">八達通 ($4.5)</span>
+                            <span class="payment-method bg-stone-100 text-stone-600">接受車票 ($5/$3)</span>
+                            <span class="payment-method bg-blue-50 text-blue-600">八達通 ($4.5)</span>
                         </div>
                     </div>
                 </div>
                 <div class="bg-white rounded-3xl p-6 shadow-sm border border-stone-100 flex flex-col sm:flex-row gap-4">
                     <div class="w-full sm:w-24 h-24 bg-green-100 rounded-2xl flex items-center justify-center shrink-0 text-3xl overflow-hidden relative">
                         🏡
+                        <!-- <img src="assets/napa_club.jpg" alt="NAPA 會所站頭" class="absolute inset-0 w-full h-full object-cover"> -->
                     </div>
                     <div>
                         <h4 class="font-bold text-green-900 text-lg">NAPA 會所</h4>
@@ -363,9 +366,9 @@
                                 <td class="p-4 text-sm font-black text-lg">$5.0</td>
                                 <td class="p-4 text-sm font-black text-lg">$4.5</td>
                             </tr>
-                            <tr class="hover:bg-stone-50 transition-colors bg-blue-50/30">
+                            <tr class="hover:bg-stone-50 transition-colors bg-green-50/30">
                                 <td class="p-4 text-sm">特惠 <br><span class="text-xs font-normal text-stone-500">(任何站點及方向，包含屯門回程)</span></td>
-                                <td class="p-4 text-sm font-black text-blue-600 text-lg">$3.0</td>
+                                <td class="p-4 text-sm font-black text-green-600 text-lg">$3.0</td>
                                 <td class="p-4 text-sm font-black text-stone-400">不設特惠折扣 <br><span class="text-[9px] font-normal text-stone-400">(按所屬路段成人收費)</span></td>
                             </tr>
                         </tbody>
@@ -374,93 +377,44 @@
                 <p class="mt-4 text-xs text-red-600 font-bold bg-red-50 p-3 rounded-lg border border-red-100">⚠️ 注意：八達通支付不設長者或學生特惠折扣，建議合資格人士預先購買 $3 特惠車票。車票於去程及回程均適用。</p>
              </div>
 
-            <!-- 車票圖鑑 (已加入 2025及2026 版車票) -->
+            <!-- 車票圖鑑 -->
             <div class="mb-12">
                 <h2 class="text-2xl font-bold mb-6 text-stone-800 flex items-center">
-                    <span class="mr-2">🎟️</span> 有效車票圖鑑 (2025 及 2026 版)
+                    <span class="mr-2">🎟️</span> 有效車票圖鑑
                 </h2>
-                
-                <!-- 2026年 新版車票 -->
-                <div class="mb-8">
-                    <h3 class="text-lg font-bold mb-4 text-green-800 border-b-2 border-green-100 pb-2">🌿 2026年 實體車票 (常規版)</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-                        
-                        <!-- 2026版 成人票 (綠色) -->
-                        <div class="bg-white p-4 rounded-2xl shadow-sm border-t-4 border-green-600 ticket-card group">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="bg-green-100 text-green-800 text-[10px] font-black px-2 py-0.5 rounded">2026 NEW</span>
-                                <span class="text-xs font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded-full">$5 成人</span>
-                            </div>
-                            <div class="bg-stone-50 h-48 rounded-lg flex items-center justify-center border border-stone-200 mb-3 relative overflow-hidden">
-                                <img src="ticket_adult.png" alt="2026成人車票" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" class="absolute inset-0 w-full h-full object-contain p-1 transition-transform duration-500 group-hover:scale-110">
-                                <div class="hidden absolute inset-0 bg-stone-100 flex-col items-center justify-center text-xs text-stone-400 italic text-center p-2">
-                                    請將成人票命名為<br><b>ticket_adult.png</b>
-                                </div>
-                            </div>
-                            <p class="text-sm font-bold text-stone-800">2026年 成人單程票</p>
-                            <p class="text-[11px] text-stone-500 mt-1">淺綠色葉脈背景設計，適用於一般成人乘客。</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- 2026版 (成人/特惠共用圖例位置) -->
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border-t-4 border-green-600 ticket-card relative overflow-hidden">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-green-100 text-green-800 text-[10px] font-black px-2 py-0.5 rounded">2026 NEW</span>
                         </div>
-
-                        <!-- 2026版 特惠票 (藍色) -->
-                        <div class="bg-white p-4 rounded-2xl shadow-sm border-t-4 border-blue-500 ticket-card group">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="bg-blue-100 text-blue-800 text-[10px] font-black px-2 py-0.5 rounded">2026 NEW</span>
-                                <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">$3 特惠</span>
-                            </div>
-                            <div class="bg-stone-50 h-48 rounded-lg flex items-center justify-center border border-stone-200 mb-3 relative overflow-hidden">
-                                <img src="ticket_concession.png" alt="2026特惠車票" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" class="absolute inset-0 w-full h-full object-contain p-1 transition-transform duration-500 group-hover:scale-110">
-                                <div class="hidden absolute inset-0 bg-stone-100 flex-col items-center justify-center text-xs text-stone-400 italic text-center p-2">
-                                    請將特惠票命名為<br><b>ticket_concession.png</b>
-                                </div>
-                            </div>
-                            <p class="text-sm font-bold text-stone-800">2026年 特惠單程票</p>
-                            <p class="text-[11px] text-stone-500 mt-1">淺藍色葉脈背景。適用於學生、12歲或以下小童及60歲或以上長者。</p>
+                        <div class="bg-stone-50 h-32 rounded-lg flex items-center justify-center border border-dashed border-stone-200 mb-3 text-xs text-stone-400 italic text-center px-2 relative">
+                            <!-- 未來放入相片 <img src="assets/ticket_adult.jpg" class="absolute inset-0 w-full h-full object-cover"> -->
+                            [請於此處加入實體車票相片]<br>$5 成人 / $3 特惠
                         </div>
-
+                        <p class="text-xs font-bold text-stone-700">最新版本車票</p>
+                    </div>
+                    <!-- 2025版 -->
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border-t-4 border-amber-500 ticket-card">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-0.5 rounded">2025 VALID</span>
+                        </div>
+                        <div class="bg-stone-50 h-32 rounded-lg flex items-center justify-center border border-dashed border-stone-200 mb-3 text-xs text-stone-400 italic text-center px-2">
+                            [2025年版 $7 票]<br>仍可當作 $5/$3 票使用
+                        </div>
+                        <p class="text-xs font-bold text-stone-700">2025年過渡版</p>
+                    </div>
+                    <!-- 2024版 -->
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border-t-4 border-stone-400 ticket-card">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-stone-100 text-stone-800 text-[10px] font-black px-2 py-0.5 rounded">2024 VALID</span>
+                        </div>
+                        <div class="bg-stone-50 h-32 rounded-lg flex items-center justify-center border border-dashed border-stone-200 mb-3 text-xs text-stone-400 italic text-center">
+                            [2024年早期版]
+                        </div>
+                        <p class="text-xs font-bold text-stone-700">2024年早期版</p>
                     </div>
                 </div>
-
-                <!-- 2025年 過渡期車票 -->
-                <div>
-                    <h3 class="text-lg font-bold mb-4 text-amber-800 border-b-2 border-amber-100 pb-2">⏳ 2025年 過渡期車票 (仍可使用)</h3>
-                    <p class="text-xs text-stone-500 mb-4">印有面值調整 ($7→$5 及 $7→$3) 的車票，於票務過渡期內仍然有效。</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-                        
-                        <!-- 2025版 成人票 ($7->$5) -->
-                        <div class="bg-white p-4 rounded-2xl shadow-sm border-t-4 border-emerald-600 ticket-card group">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-0.5 rounded">過渡適用</span>
-                                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">$5 成人</span>
-                            </div>
-                            <div class="bg-stone-50 h-48 rounded-lg flex items-center justify-center border border-stone-200 mb-3 relative overflow-hidden">
-                                <img src="1000095770.jpg" alt="2025成人過渡車票" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" class="absolute inset-0 w-full h-full object-cover p-1 transition-transform duration-500 group-hover:scale-110">
-                                <div class="hidden absolute inset-0 bg-stone-100 flex-col items-center justify-center text-xs text-stone-400 italic text-center p-2">
-                                    請確認 2025 成人票檔名為<br><b>1000095770.jpg</b>
-                                </div>
-                            </div>
-                            <p class="text-sm font-bold text-stone-800">2025年 成人過渡票</p>
-                            <p class="text-[11px] text-stone-500 mt-1">深綠色底，印有 <b>$7→$5</b> 字樣，可作 $5 車資使用。</p>
-                        </div>
-
-                        <!-- 2025版 特惠票 ($7->$3) -->
-                        <div class="bg-white p-4 rounded-2xl shadow-sm border-t-4 border-cyan-500 ticket-card group">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-0.5 rounded">過渡適用</span>
-                                <span class="text-xs font-bold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded-full">$3 特惠</span>
-                            </div>
-                            <div class="bg-stone-50 h-48 rounded-lg flex items-center justify-center border border-stone-200 mb-3 relative overflow-hidden">
-                                <img src="1000095769.jpg" alt="2025特惠過渡車票" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" class="absolute inset-0 w-full h-full object-cover p-1 transition-transform duration-500 group-hover:scale-110">
-                                <div class="hidden absolute inset-0 bg-stone-100 flex-col items-center justify-center text-xs text-stone-400 italic text-center p-2">
-                                    請確認 2025 特惠票檔名為<br><b>1000095769.jpg</b>
-                                </div>
-                            </div>
-                            <p class="text-sm font-bold text-stone-800">2025年 特惠過渡票</p>
-                            <p class="text-[11px] text-stone-500 mt-1">湖水藍色底，印有 <b>$7→$3</b> 字樣，可作 $3 車資使用。</p>
-                        </div>
-
-                    </div>
-                </div>
-
             </div>
 
             <!-- 計算機 -->
@@ -472,7 +426,7 @@
                         <!-- Adult -->
                         <div class="flex items-center justify-between p-4 bg-green-50 rounded-2xl border border-green-100">
                             <div>
-                                <h4 class="font-bold text-green-900 text-lg">成人單程票</h4>
+                                <h4 class="font-bold text-green-900 text-lg">成人票 (車票)</h4>
                                 <p class="text-sm text-green-700 font-mono mt-1">每程 $5.00</p>
                             </div>
                             <div class="flex items-center space-x-4 md:space-x-6">
@@ -484,7 +438,7 @@
                         <!-- Concession -->
                         <div class="flex items-center justify-between p-4 bg-blue-50 rounded-2xl border border-blue-100">
                             <div>
-                                <h4 class="font-bold text-blue-900 text-lg">特惠單程票</h4>
+                                <h4 class="font-bold text-blue-900 text-lg">特惠票 (車票)</h4>
                                 <p class="text-sm text-blue-700 font-mono mt-1">每程 $3.00</p>
                             </div>
                             <div class="flex items-center space-x-4 md:space-x-6">
@@ -623,6 +577,7 @@
             document.getElementById(`tab-${tabId}`).classList.add('active');
             document.getElementById(`sec-${tabId}`).classList.remove('hidden');
             
+            // 如果不是在概覽頁面，滾動到頂部
             if(tabId !== 'overview') {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
@@ -647,9 +602,11 @@
             const seconds = String(now.getSeconds()).padStart(2, '0');
             const currentTimeStr = `${hours}:${minutes}`;
             
+            // 更新時鐘
             const clockEl = document.getElementById('live-clock');
             if (clockEl) clockEl.innerText = `${hours}:${minutes}:${seconds}`;
 
+            // 判斷平日或假日
             const isWeekend = now.getDay() === 0 || now.getDay() === 6;
             const todaySchedules = isWeekend ? SCHEDULES.weekend : SCHEDULES.weekday;
             
@@ -659,6 +616,7 @@
                 boardTypeEl.className = isWeekend ? "ml-3 text-xs bg-red-500/80 text-white px-2 py-1 rounded" : "ml-3 text-xs bg-green-500/80 text-white px-2 py-1 rounded";
             }
 
+            // 尋找下一班車函數
             function findNextBus(list) {
                 const next = list.find(time => time > currentTimeStr);
                 if (!next) return { time: "今日完結", countdown: "請等候明日頭班車" };
@@ -680,6 +638,7 @@
             const napaStatus = findNextBus(todaySchedules.toVcity);
             const vcityStatus = findNextBus(todaySchedules.toNapa);
 
+            // 更新 DOM
             const napaTimeEl = document.getElementById('next-napa-time');
             if (napaTimeEl) {
                 napaTimeEl.innerText = napaStatus.time;
@@ -689,6 +648,7 @@
             }
         }
 
+        // 初始化
         setInterval(updateLiveBoard, 1000);
         updateLiveBoard();
         switchTab('overview');
