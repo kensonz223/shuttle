@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAPA 穿梭巴士互動資訊站</title>
+    <title>NAPA 穿梭巴士資訊站 | Shuttle Bus Info</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Sans:wght@300;400;500;700&display=swap');
         
         body {
-            font-family: 'Noto Sans TC', sans-serif;
+            font-family: 'Noto Sans TC', 'Noto Sans', sans-serif;
             background-color: #f8f9fa;
         }
+
+        /* === 語言切換核心 CSS === */
+        :lang(zh-HK) .lang-en { display: none !important; }
+        :lang(en) .lang-zh { display: none !important; }
 
         .tab-btn.active {
             border-bottom: 4px solid #065f46;
@@ -71,42 +75,73 @@
 </head>
 <body class="text-stone-800 antialiased min-h-screen flex flex-col">
 
+    <!-- Header -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <div class="bg-green-800 text-white p-2 rounded-lg text-2xl">🚍</div>
                 <div>
-                    <h1 class="text-xl md:text-2xl font-bold text-green-900 leading-tight">NAPA 穿梭巴士資訊站</h1>
-                    <p class="text-xs text-stone-500 font-medium">官方最新營運及票務指南</p>
+                    <h1 class="text-xl md:text-2xl font-bold text-green-900 leading-tight">
+                        <span class="lang-zh">NAPA 穿梭巴士資訊站</span>
+                        <span class="lang-en">NAPA Shuttle Bus Info</span>
+                    </h1>
+                    <p class="text-xs text-stone-500 font-medium">
+                        <span class="lang-zh">官方最新營運及票務指南</span>
+                        <span class="lang-en">Official Operation & Ticketing Guide</span>
+                    </p>
                 </div>
             </div>
-            <div class="hidden md:block text-right">
-                <div class="text-sm font-bold text-stone-600">更新日期: 2026.03.29</div>
-                <div class="text-xs text-green-600 flex items-center justify-end">
-                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
-                    服務正常運作中
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:block text-right">
+                    <div class="text-sm font-bold text-stone-600">
+                        <span class="lang-zh">更新日期: 2026.03.29</span>
+                        <span class="lang-en">Last Updated: 2026.03.29</span>
+                    </div>
+                    <div class="text-xs text-green-600 flex items-center justify-end">
+                        <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                        <span class="lang-zh">服務正常運作中</span>
+                        <span class="lang-en">Service Running Normally</span>
+                    </div>
                 </div>
+                <!-- Language Switch Button -->
+                <button onclick="toggleLanguage()" class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-3 py-1.5 rounded-lg text-sm font-bold shadow-sm transition-all flex items-center border border-stone-200">
+                    <span class="lang-zh">🌐 Eng</span>
+                    <span class="lang-en">🌐 中文</span>
+                </button>
             </div>
         </div>
         <nav class="max-w-6xl mx-auto px-4 flex space-x-6 overflow-x-auto scrollbar-hide border-t border-stone-100">
-            <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn active py-4 px-1 text-stone-500 whitespace-nowrap">概覽</button>
-            <button onclick="switchTab('timetable')" id="tab-timetable" class="tab-btn py-4 px-1 text-stone-500 whitespace-nowrap">時間表</button>
-            <button onclick="switchTab('locations')" id="tab-locations" class="tab-btn py-4 px-1 text-stone-500 whitespace-nowrap">上落客點</button>
-            <button onclick="switchTab('tickets')" id="tab-tickets" class="tab-btn py-4 px-1 text-stone-500 whitespace-nowrap">車票與付款</button>
-            <button onclick="switchTab('rules')" id="tab-rules" class="tab-btn py-4 px-1 text-stone-500 whitespace-nowrap">乘客守則</button>
+            <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn active py-4 px-1 text-stone-500 whitespace-nowrap">
+                <span class="lang-zh">概覽</span><span class="lang-en">Overview</span>
+            </button>
+            <button onclick="switchTab('timetable')" id="tab-timetable" class="tab-btn py-4 px-1 text-stone-500 whitespace-nowrap">
+                <span class="lang-zh">時間表</span><span class="lang-en">Timetable</span>
+            </button>
+            <button onclick="switchTab('locations')" id="tab-locations" class="tab-btn py-4 px-1 text-stone-500 whitespace-nowrap">
+                <span class="lang-zh">上落客點</span><span class="lang-en">Locations</span>
+            </button>
+            <button onclick="switchTab('tickets')" id="tab-tickets" class="tab-btn py-4 px-1 text-stone-500 whitespace-nowrap">
+                <span class="lang-zh">車票與付款</span><span class="lang-en">Tickets & Fares</span>
+            </button>
+            <button onclick="switchTab('rules')" id="tab-rules" class="tab-btn py-4 px-1 text-stone-500 whitespace-nowrap">
+                <span class="lang-zh">乘客守則</span><span class="lang-en">Passenger Rules</span>
+            </button>
         </nav>
     </header>
 
     <main class="flex-grow max-w-6xl mx-auto w-full px-4 py-8">
 
-        <!-- 概覽 -->
+        <!-- 概覽 Overview -->
         <section id="sec-overview" class="block animate-fade-in">
             
-            <!-- 實時站頭看板 -->
+            <!-- 實時站頭看板 Real-Time Board -->
             <div class="dashboard-card rounded-3xl p-6 mb-8 text-white shadow-xl">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
                     <h2 class="text-xl font-bold flex items-center mb-2 md:mb-0">
-                        <span class="mr-2">🕒</span> 站頭實時看板 <span id="board-type" class="ml-3 text-xs bg-white/20 px-2 py-1 rounded">載入中...</span>
+                        <span class="mr-2">🕒</span> 
+                        <span class="lang-zh">站頭實時看板</span>
+                        <span class="lang-en">Real-Time Terminal Board</span> 
+                        <span id="board-type" class="ml-3 text-xs bg-white/20 px-2 py-1 rounded">...</span>
                     </h2>
                     <div id="live-clock" class="text-lg font-mono bg-white/10 px-4 py-1 rounded-full border border-white/20 tracking-wider">00:00:00</div>
                 </div>
@@ -114,27 +149,37 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <!-- NAPA -> V city -->
                     <div class="bg-white/10 rounded-2xl p-5 border border-white/10 backdrop-blur-sm">
-                        <p class="text-sm text-green-200 font-bold mb-1">NAPA 會所 開出 (往屯門)</p>
+                        <p class="text-sm text-green-200 font-bold mb-1">
+                            <span class="lang-zh">NAPA 會所 開出 (往屯門)</span>
+                            <span class="lang-en">Departs NAPA Clubhouse (To Tuen Mun)</span>
+                        </p>
                         <div class="flex justify-between items-end">
                             <div>
                                 <div id="next-napa-time" class="text-3xl font-black tracking-tight">--:--</div>
-                                <div id="napa-countdown" class="text-xs text-green-300 mt-1 font-medium">載入中...</div>
+                                <div id="napa-countdown" class="text-xs text-green-300 mt-1 font-medium">...</div>
                             </div>
                             <div class="text-right">
-                                <span class="text-[10px] bg-green-500/30 text-white px-2 py-1 rounded uppercase tracking-wider font-bold">下一班車</span>
+                                <span class="text-[10px] bg-green-500/30 text-white px-2 py-1 rounded uppercase tracking-wider font-bold">
+                                    <span class="lang-zh">下一班車</span><span class="lang-en">NEXT BUS</span>
+                                </span>
                             </div>
                         </div>
                     </div>
                     <!-- V city -> NAPA -->
                     <div class="bg-white/10 rounded-2xl p-5 border border-white/10 backdrop-blur-sm">
-                        <p class="text-sm text-blue-200 font-bold mb-1">V city 開出 (回 NAPA)</p>
+                        <p class="text-sm text-blue-200 font-bold mb-1">
+                            <span class="lang-zh">V city 開出 (回 NAPA)</span>
+                            <span class="lang-en">Departs V city (To NAPA)</span>
+                        </p>
                         <div class="flex justify-between items-end">
                             <div>
                                 <div id="next-vcity-time" class="text-3xl font-black tracking-tight">--:--</div>
-                                <div id="vcity-countdown" class="text-xs text-blue-300 mt-1 font-medium">載入中...</div>
+                                <div id="vcity-countdown" class="text-xs text-blue-300 mt-1 font-medium">...</div>
                             </div>
                             <div class="text-right">
-                                <span class="text-[10px] bg-blue-500/30 text-white px-2 py-1 rounded uppercase tracking-wider font-bold">下一班車</span>
+                                <span class="text-[10px] bg-blue-500/30 text-white px-2 py-1 rounded uppercase tracking-wider font-bold">
+                                    <span class="lang-zh">下一班車</span><span class="lang-en">NEXT BUS</span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -143,21 +188,31 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
                 <div class="lg:col-span-2 bg-white rounded-3xl p-8 shadow-sm border border-stone-100 flex flex-col justify-center">
-                    <h2 class="text-3xl font-bold mb-4 text-stone-800">歡迎使用 NAPA 穿巴服務</h2>
+                    <h2 class="text-3xl font-bold mb-4 text-stone-800">
+                        <span class="lang-zh">歡迎使用 NAPA 穿巴服務</span>
+                        <span class="lang-en">Welcome to NAPA Shuttle Service</span>
+                    </h2>
                     <p class="text-lg text-stone-600 leading-relaxed mb-6">
-                        往返 <strong>NAPA</strong> 與 <strong>屯門 V city</strong> 的接駁巴士票價已根據支付方式與路段進行調整，請留意最新收費標準。
+                        <span class="lang-zh">往返 <strong>NAPA</strong> 與 <strong>屯門 V city</strong> 的接駁巴士票價已根據支付方式與路段進行調整，請留意最新收費標準。</span>
+                        <span class="lang-en">Shuttle bus fares between <strong>NAPA</strong> and <strong>Tuen Mun V city</strong> have been adjusted based on payment methods and routes. Please note the latest fare schedule.</span>
                     </p>
                     <div class="flex flex-wrap gap-3">
                         <div class="bg-green-100 p-3 rounded-2xl border border-green-200">
-                            <span class="block text-xs font-bold text-green-700">任何站點 (成人車票)</span>
+                            <span class="block text-xs font-bold text-green-700">
+                                <span class="lang-zh">任何站點 (成人車票)</span><span class="lang-en">Any Stop (Adult Ticket)</span>
+                            </span>
                             <span class="text-xl font-black text-green-900">$5.0</span>
                         </div>
                         <div class="bg-blue-100 p-3 rounded-2xl border border-blue-200">
-                            <span class="block text-xs font-bold text-blue-700">任何站點 (特惠車票)</span>
+                            <span class="block text-xs font-bold text-blue-700">
+                                <span class="lang-zh">任何站點 (特惠車票)</span><span class="lang-en">Any Stop (Concession)</span>
+                            </span>
                             <span class="text-xl font-black text-blue-900">$3.0</span>
                         </div>
                         <div class="bg-stone-100 p-3 rounded-2xl">
-                            <span class="block text-xs font-bold text-stone-600">八達通 (全程/黃金海岸)</span>
+                            <span class="block text-xs font-bold text-stone-600">
+                                <span class="lang-zh">八達通 (全程/黃金海岸)</span><span class="lang-en">Octopus (Full / Gold Coast)</span>
+                            </span>
                             <span class="text-lg font-black text-stone-800">$7.0 / $4.5</span>
                         </div>
                     </div>
@@ -165,19 +220,26 @@
                 <div class="bg-stone-800 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden">
                     <div class="relative z-10">
                         <h3 class="text-xl font-bold mb-4 flex items-center">
-                            <span class="mr-2">💡</span> 省錢小貼士
+                            <span class="mr-2">💡</span> 
+                            <span class="lang-zh">省錢小貼士</span><span class="lang-en">Money-Saving Tips</span>
                         </h3>
                         <p class="text-stone-300 text-sm leading-relaxed mb-4">
-                            如需往返屯門站、三聖或黃金海岸，<strong>預先購買車票</strong>可享 $5 成人及 $3 特惠優惠價（去程及回程均適用）；若直接拍八達通則不設特惠折扣。
+                            <span class="lang-zh">如需往返屯門站、三聖或黃金海岸，<strong>預先購買車票</strong>可享 $5 成人及 $3 特惠優惠價（去程及回程均適用）；若直接拍八達通則不設特惠折扣。</span>
+                            <span class="lang-en">For trips to Tuen Mun Station, Sam Shing, or Gold Coast, <strong>pre-purchasing tickets</strong> offers a discounted rate of $5 (Adult) and $3 (Concession) for both outbound and return trips. Direct Octopus payment does not offer concession discounts.</span>
                         </p>
-                        <button onclick="switchTab('tickets')" class="text-xs font-bold underline underline-offset-4 text-stone-100 hover:text-white">查看詳細收費表及車票圖鑑 →</button>
+                        <button onclick="switchTab('tickets')" class="text-xs font-bold underline underline-offset-4 text-stone-100 hover:text-white">
+                            <span class="lang-zh">查看詳細收費表及車票圖鑑 →</span><span class="lang-en">View detailed fare table & ticket gallery →</span>
+                        </button>
                     </div>
                     <div class="absolute -right-4 -bottom-4 text-8xl opacity-10">🎟️</div>
                 </div>
             </div>
             
             <div class="bg-white rounded-3xl p-8 shadow-sm border border-stone-100 mb-8">
-                <h3 class="text-xl font-bold mb-6 flex items-center"><span class="mr-2">🗺️</span> 路線及支付方式示意</h3>
+                <h3 class="text-xl font-bold mb-6 flex items-center">
+                    <span class="mr-2">🗺️</span> 
+                    <span class="lang-zh">路線及支付方式示意</span><span class="lang-en">Route & Payment Methods</span>
+                </h3>
                 <div class="flex flex-col md:flex-row items-center justify-between gap-4 py-4">
                     <div class="text-center group w-32">
                         <div class="w-16 h-16 bg-green-50 rounded-full mx-auto flex items-center justify-center text-2xl mb-2 shadow-inner group-hover:scale-110 transition-transform">🏡</div>
@@ -187,13 +249,21 @@
                         <div class="h-1 bg-gradient-to-r from-green-200 via-amber-200 to-blue-200 w-full relative mb-6">
                             <div class="absolute top-1/2 left-1/3 -translate-y-1/2 flex flex-col items-center">
                                 <div class="w-3 h-3 bg-white border-2 border-amber-400 rounded-full mb-1"></div>
-                                <span class="text-[10px] font-bold text-stone-500 whitespace-nowrap">黃金海岸</span>
-                                <span class="text-[9px] bg-stone-700 text-white px-1 rounded mt-1">車票 $5 / 拍卡 $4.5</span>
+                                <span class="text-[10px] font-bold text-stone-500 whitespace-nowrap">
+                                    <span class="lang-zh">黃金海岸</span><span class="lang-en">Gold Coast</span>
+                                </span>
+                                <span class="text-[9px] bg-stone-700 text-white px-1 rounded mt-1">
+                                    <span class="lang-zh">車票 $5 / 拍卡 $4.5</span><span class="lang-en">Ticket $5 / Octopus $4.5</span>
+                                </span>
                             </div>
                             <div class="absolute top-1/2 left-2/3 -translate-y-1/2 flex flex-col items-center">
                                 <div class="w-3 h-3 bg-white border-2 border-amber-400 rounded-full mb-1"></div>
-                                <span class="text-[10px] font-bold text-stone-500 whitespace-nowrap">三聖邨</span>
-                                <span class="text-[9px] bg-stone-700 text-white px-1 rounded mt-1">車票 $5 / 拍卡 $7</span>
+                                <span class="text-[10px] font-bold text-stone-500 whitespace-nowrap">
+                                    <span class="lang-zh">三聖邨</span><span class="lang-en">Sam Shing Estate</span>
+                                </span>
+                                <span class="text-[9px] bg-stone-700 text-white px-1 rounded mt-1">
+                                    <span class="lang-zh">車票 $5 / 拍卡 $7</span><span class="lang-en">Ticket $5 / Octopus $7</span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -205,34 +275,44 @@
             </div>
         </section>
 
-        <!-- 時間表分頁 -->
+        <!-- 時間表分頁 Timetable -->
         <section id="sec-timetable" class="hidden animate-fade-in">
             <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
-                    <h2 class="text-3xl font-bold mb-2 text-stone-800 font-serif">班次時間表</h2>
-                    <p class="text-stone-500">所有班次均準時開出，請提前到達候車點。</p>
+                    <h2 class="text-3xl font-bold mb-2 text-stone-800 font-serif">
+                        <span class="lang-zh">班次時間表</span><span class="lang-en">Bus Timetable</span>
+                    </h2>
+                    <p class="text-stone-500">
+                        <span class="lang-zh">所有班次均準時開出，請提前到達候車點。</span>
+                        <span class="lang-en">All buses depart on time. Please arrive early at the stop.</span>
+                    </p>
                 </div>
                 <div class="flex space-x-3">
                     <span class="flex items-center text-xs font-bold text-green-700 bg-green-100 px-3 py-1 rounded-full">
-                        <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span> 途經三聖/黃金海岸
+                        <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span> 
+                        <span class="lang-zh">途經三聖/黃金海岸</span><span class="lang-en">Via Sam Shing / Gold Coast</span>
                     </span>
                     <span class="flex items-center text-xs font-bold text-stone-600 bg-stone-100 px-3 py-1 rounded-full">
-                        <span class="w-2 h-2 bg-stone-400 rounded-full mr-2"></span> 直達/常規班次
+                        <span class="w-2 h-2 bg-stone-400 rounded-full mr-2"></span> 
+                        <span class="lang-zh">直達/常規班次</span><span class="lang-en">Direct / Regular Route</span>
                     </span>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- 星期一至五 -->
+                <!-- Weekdays -->
                 <div class="bg-white rounded-3xl shadow-sm border border-stone-200 overflow-hidden">
                     <div class="bg-stone-800 text-white p-5 flex justify-between items-center">
                         <span class="font-bold tracking-widest uppercase">Mon - Fri</span>
-                        <span class="text-xs opacity-70">平日 (假期除外)</span>
+                        <span class="text-xs opacity-70">
+                            <span class="lang-zh">平日 (假期除外)</span><span class="lang-en">Weekdays (Except PH)</span>
+                        </span>
                     </div>
                     <div class="p-6">
                         <div class="mb-8">
                             <h4 class="text-blue-700 font-bold mb-4 flex items-center">
-                                <span class="w-2 h-4 bg-blue-600 rounded mr-2"></span> 屯門西鐵站 (V city) 開出
+                                <span class="w-2 h-4 bg-blue-600 rounded mr-2"></span> 
+                                <span class="lang-zh">屯門西鐵站 (V city) 開出</span><span class="lang-en">Departs Tuen Mun Station (V city)</span>
                             </h4>
                             <div class="flex flex-wrap gap-1">
                                 <span class="time-badge normal">06:55</span><span class="time-badge normal">07:25</span><span class="time-badge normal">07:55</span><span class="time-badge normal">08:25</span><span class="time-badge normal">08:55</span><span class="time-badge normal">09:25</span><span class="time-badge normal">10:05</span><span class="time-badge normal">10:35</span><span class="time-badge normal">11:05</span><span class="time-badge normal">11:35</span><span class="time-badge normal">12:05</span><span class="time-badge normal">12:35</span><span class="time-badge via">13:05</span><span class="time-badge normal">13:35</span><span class="time-badge via">14:05</span><span class="time-badge normal">14:35</span><span class="time-badge via">15:05</span><span class="time-badge normal">15:35</span><span class="time-badge via">16:05</span><span class="time-badge normal">16:35</span><span class="time-badge via">17:05</span><span class="time-badge normal">17:35</span><span class="time-badge via">18:05</span><span class="time-badge normal">18:35</span><span class="time-badge via">19:05</span><span class="time-badge via">19:35</span><span class="time-badge via">20:05</span><span class="time-badge via">20:35</span><span class="time-badge via">21:05</span><span class="time-badge via">21:35</span><span class="time-badge via">22:05</span>
@@ -240,7 +320,8 @@
                         </div>
                         <div>
                             <h4 class="text-green-700 font-bold mb-4 flex items-center">
-                                <span class="w-2 h-4 bg-green-600 rounded mr-2"></span> NAPA 會所 開出
+                                <span class="w-2 h-4 bg-green-600 rounded mr-2"></span> 
+                                <span class="lang-zh">NAPA 會所 開出</span><span class="lang-en">Departs NAPA Clubhouse</span>
                             </h4>
                             <div class="flex flex-wrap gap-1">
                                 <span class="time-badge via">06:35</span><span class="time-badge via">07:05</span><span class="time-badge via">07:35</span><span class="time-badge via">08:05</span><span class="time-badge via">08:35</span><span class="time-badge via">09:05</span><span class="time-badge via">09:45</span><span class="time-badge via">10:15</span><span class="time-badge via">10:45</span><span class="time-badge via">11:15</span><span class="time-badge via">11:45</span><span class="time-badge via">12:15</span><span class="time-badge normal">12:45</span><span class="time-badge via">13:15</span><span class="time-badge normal">13:45</span><span class="time-badge via">14:15</span><span class="time-badge normal">14:45</span><span class="time-badge via">15:15</span><span class="time-badge normal">15:45</span><span class="time-badge via">16:15</span><span class="time-badge normal">16:45</span><span class="time-badge via">17:15</span><span class="time-badge normal">17:45</span><span class="time-badge via">18:15</span><span class="time-badge normal">18:45</span><span class="time-badge normal">19:15</span><span class="time-badge normal">19:45</span><span class="time-badge normal">20:15</span><span class="time-badge normal">20:45</span><span class="time-badge normal">21:15</span><span class="time-badge normal">21:45</span>
@@ -249,16 +330,19 @@
                     </div>
                 </div>
 
-                <!-- 星期六、日及假期 -->
+                <!-- Weekends -->
                 <div class="bg-white rounded-3xl shadow-sm border border-stone-200 overflow-hidden">
                     <div class="bg-red-900 text-white p-5 flex justify-between items-center">
                         <span class="font-bold tracking-widest uppercase">Sat, Sun & PH</span>
-                        <span class="text-xs opacity-70">假日 (含公眾假期)</span>
+                        <span class="text-xs opacity-70">
+                            <span class="lang-zh">假日 (含公眾假期)</span><span class="lang-en">Weekends & Holidays (PH)</span>
+                        </span>
                     </div>
                     <div class="p-6">
                         <div class="mb-8">
                             <h4 class="text-blue-700 font-bold mb-4 flex items-center">
-                                <span class="w-2 h-4 bg-blue-600 rounded mr-2"></span> 屯門西鐵站 (V city) 開出
+                                <span class="w-2 h-4 bg-blue-600 rounded mr-2"></span> 
+                                <span class="lang-zh">屯門西鐵站 (V city) 開出</span><span class="lang-en">Departs Tuen Mun Station (V city)</span>
                             </h4>
                             <div class="flex flex-wrap gap-1">
                                 <span class="time-badge normal">07:25</span><span class="time-badge via">07:55</span><span class="time-badge normal">08:25</span><span class="time-badge via">08:55</span><span class="time-badge normal">09:25</span><span class="time-badge via">10:05</span><span class="time-badge normal">10:35</span><span class="time-badge via">11:05</span><span class="time-badge normal">11:35</span><span class="time-badge via">12:05</span><span class="time-badge normal">12:35</span><span class="time-badge via">13:05</span><span class="time-badge normal">13:35</span><span class="time-badge via">14:05</span><span class="time-badge normal">14:35</span><span class="time-badge via">15:05</span><span class="time-badge normal">15:35</span><span class="time-badge via">16:05</span><span class="time-badge normal">16:35</span><span class="time-badge via">17:05</span><span class="time-badge normal">17:35</span><span class="time-badge via">18:05</span><span class="time-badge normal">18:35</span><span class="time-badge via">19:05</span><span class="time-badge via">19:35</span><span class="time-badge via">20:05</span><span class="time-badge via">20:35</span><span class="time-badge via">21:05</span><span class="time-badge via">21:35</span><span class="time-badge via">22:05</span>
@@ -266,7 +350,8 @@
                         </div>
                         <div>
                             <h4 class="text-green-700 font-bold mb-4 flex items-center">
-                                <span class="w-2 h-4 bg-green-600 rounded mr-2"></span> NAPA 會所 開出
+                                <span class="w-2 h-4 bg-green-600 rounded mr-2"></span> 
+                                <span class="lang-zh">NAPA 會所 開出</span><span class="lang-en">Departs NAPA Clubhouse</span>
                             </h4>
                             <div class="flex flex-wrap gap-1">
                                 <span class="time-badge via">07:05</span><span class="time-badge normal">07:35</span><span class="time-badge via">08:05</span><span class="time-badge normal">08:35</span><span class="time-badge via">09:05</span><span class="time-badge normal">09:45</span><span class="time-badge via">10:15</span><span class="time-badge normal">10:45</span><span class="time-badge via">11:15</span><span class="time-badge normal">11:45</span><span class="time-badge via">12:15</span><span class="time-badge normal">12:45</span><span class="time-badge via">13:15</span><span class="time-badge normal">13:45</span><span class="time-badge via">14:15</span><span class="time-badge normal">14:45</span><span class="time-badge via">15:15</span><span class="time-badge normal">15:45</span><span class="time-badge via">16:15</span><span class="time-badge normal">16:45</span><span class="time-badge via">17:15</span><span class="time-badge normal">17:45</span><span class="time-badge via">18:15</span><span class="time-badge normal">18:45</span><span class="time-badge normal">19:15</span><span class="time-badge normal">19:45</span><span class="time-badge normal">20:15</span><span class="time-badge normal">20:45</span><span class="time-badge normal">21:15</span><span class="time-badge normal">21:45</span>
@@ -277,71 +362,111 @@
             </div>
         </section>
 
-        <!-- 上落客位置 -->
+        <!-- 上落客位置 Locations -->
         <section id="sec-locations" class="hidden animate-fade-in">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-stone-800">上落客實景位置導覽</h2>
-                <p class="text-stone-500 mt-2">請參考下方實境照片，輕鬆找到您的專屬候車點。</p>
+                <h2 class="text-3xl font-bold text-stone-800">
+                    <span class="lang-zh">上落客實景位置導覽</span><span class="lang-en">Boarding & Alighting Locations Guide</span>
+                </h2>
+                <p class="text-stone-500 mt-2">
+                    <span class="lang-zh">請參考下方實境照片，輕鬆找到您的專屬候車點。</span>
+                    <span class="lang-en">Refer to the real-world photos below to easily find your waiting point.</span>
+                </p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
-                <!-- 1. NAPA 會所 -->
+                <!-- 1. NAPA Clubhouse -->
                 <div class="bg-white rounded-3xl p-4 shadow-sm border border-stone-100 flex flex-col sm:flex-row gap-5 hover:shadow-md transition-shadow">
                     <div class="w-full sm:w-40 h-40 bg-stone-100 rounded-2xl shrink-0 overflow-hidden relative group">
-                        <img src="napa_station.PNG" alt="NAPA 會所" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <img src="napa_station.PNG" alt="NAPA Station" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute top-2 left-2 bg-white/90 backdrop-blur-sm rounded-lg w-8 h-8 flex items-center justify-center text-sm shadow-sm">🏡</div>
                     </div>
                     <div class="py-2 flex flex-col justify-center">
-                        <h4 class="font-bold text-green-900 text-lg">NAPA 會所</h4>
-                        <p class="text-xs text-stone-500 mt-1 mb-2">會所客戶服務中心旁穿梭巴士站</p>
-                        <p class="text-[10px] text-stone-400 italic font-bold">＊請於此處預先購買車票以享優惠</p>
+                        <h4 class="font-bold text-green-900 text-lg">
+                            <span class="lang-zh">NAPA 會所</span><span class="lang-en">NAPA Clubhouse</span>
+                        </h4>
+                        <p class="text-xs text-stone-500 mt-1 mb-2">
+                            <span class="lang-zh">會所客戶服務中心旁穿梭巴士站</span>
+                            <span class="lang-en">Shuttle Bus Stop beside Customer Service Centre</span>
+                        </p>
+                        <p class="text-[10px] text-stone-400 italic font-bold">
+                            <span class="lang-zh">＊請於此處預先購買車票以享優惠</span>
+                            <span class="lang-en">*Please pre-purchase tickets here for discounts</span>
+                        </p>
                     </div>
                 </div>
 
-                <!-- 2. 黃金海岸商場 -->
+                <!-- 2. Gold Coast -->
                 <div class="bg-white rounded-3xl p-4 shadow-sm border border-stone-100 flex flex-col sm:flex-row gap-5 hover:shadow-md transition-shadow">
                     <div class="w-full sm:w-40 h-40 bg-stone-100 rounded-2xl shrink-0 overflow-hidden relative group">
-                        <img src="goldcoast_station.PNG" alt="黃金海岸商場" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <img src="goldcoast_station.PNG" alt="Gold Coast Station" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute top-2 left-2 bg-white/90 backdrop-blur-sm rounded-lg w-8 h-8 flex items-center justify-center text-sm shadow-sm">🌊</div>
                     </div>
                     <div class="py-2 flex flex-col justify-center">
-                        <h4 class="font-bold text-cyan-900 text-lg">黃金海岸商場</h4>
-                        <p class="text-xs text-stone-500 mt-1 mb-2">鄉村俱樂部旁穿梭巴士站</p>
+                        <h4 class="font-bold text-cyan-900 text-lg">
+                            <span class="lang-zh">黃金海岸商場</span><span class="lang-en">Gold Coast Piazza</span>
+                        </h4>
+                        <p class="text-xs text-stone-500 mt-1 mb-2">
+                            <span class="lang-zh">鄉村俱樂部旁穿梭巴士站</span>
+                            <span class="lang-en">Shuttle Bus Stop beside Country Club</span>
+                        </p>
                         <div class="flex gap-2 flex-wrap">
-                            <span class="payment-method bg-green-50 text-green-700 border border-green-200">接受車票 ($5/$3)</span>
-                            <span class="payment-method bg-blue-50 text-blue-600 border border-blue-200">八達通 ($4.5)</span>
+                            <span class="payment-method bg-green-50 text-green-700 border border-green-200">
+                                <span class="lang-zh">車票 ($5/$3)</span><span class="lang-en">Ticket ($5/$3)</span>
+                            </span>
+                            <span class="payment-method bg-blue-50 text-blue-600 border border-blue-200">
+                                <span class="lang-zh">八達通 ($4.5)</span><span class="lang-en">Octopus ($4.5)</span>
+                            </span>
                         </div>
                     </div>
                 </div>
 
-                <!-- 3. V city (屯門站) -->
+                <!-- 3. V city -->
                 <div class="bg-white rounded-3xl p-4 shadow-sm border border-stone-100 flex flex-col sm:flex-row gap-5 hover:shadow-md transition-shadow">
                     <div class="w-full sm:w-40 h-40 bg-stone-100 rounded-2xl shrink-0 overflow-hidden relative group">
-                        <img src="vcity_station.PNG" alt="V city (屯門站)" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <img src="vcity_station.PNG" alt="V city Station" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute top-2 left-2 bg-white/90 backdrop-blur-sm rounded-lg w-8 h-8 flex items-center justify-center text-sm shadow-sm">🚉</div>
                     </div>
                     <div class="py-2 flex flex-col justify-center">
-                        <h4 class="font-bold text-blue-900 text-lg">V city (屯門站)</h4>
-                        <p class="text-xs text-stone-500 mt-1 mb-2">地面公共運輸交匯處過境巴士站 (近出口)</p>
+                        <h4 class="font-bold text-blue-900 text-lg">
+                            <span class="lang-zh">V city (屯門站)</span><span class="lang-en">V city (Tuen Mun Stn)</span>
+                        </h4>
+                        <p class="text-xs text-stone-500 mt-1 mb-2">
+                            <span class="lang-zh">地面公共運輸交匯處過境巴士站 (近出口)</span>
+                            <span class="lang-en">G/F PTI Cross-boundary Bus Stop (Near Exit)</span>
+                        </p>
                         <div class="flex gap-2 flex-wrap">
-                            <span class="payment-method bg-green-50 text-green-700 border border-green-200">接受車票 ($5/$3)</span>
-                            <span class="payment-method bg-stone-100 text-stone-600">八達通 ($7)</span>
+                            <span class="payment-method bg-green-50 text-green-700 border border-green-200">
+                                <span class="lang-zh">車票 ($5/$3)</span><span class="lang-en">Ticket ($5/$3)</span>
+                            </span>
+                            <span class="payment-method bg-stone-100 text-stone-600">
+                                <span class="lang-zh">八達通 ($7)</span><span class="lang-en">Octopus ($7)</span>
+                            </span>
                         </div>
                     </div>
                 </div>
 
-                <!-- 4. 三聖邨 -->
+                <!-- 4. Sam Shing -->
                 <div class="bg-white rounded-3xl p-4 shadow-sm border border-stone-100 flex flex-col sm:flex-row gap-5 hover:shadow-md transition-shadow">
                     <div class="w-full sm:w-40 h-40 bg-stone-100 rounded-2xl shrink-0 overflow-hidden relative group">
-                        <img src="sanshing_station.PNG" alt="三聖邨" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <img src="sanshing_station.PNG" alt="Sam Shing Station" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute top-2 left-2 bg-white/90 backdrop-blur-sm rounded-lg w-8 h-8 flex items-center justify-center text-sm shadow-sm">🦐</div>
                     </div>
                     <div class="py-2 flex flex-col justify-center">
-                        <h4 class="font-bold text-amber-900 text-lg">三聖邨</h4>
-                        <p class="text-xs text-stone-500 mt-1 mb-2">青山公路-青山灣段 (近三聖邨候車位置)</p>
+                        <h4 class="font-bold text-amber-900 text-lg">
+                            <span class="lang-zh">三聖邨</span><span class="lang-en">Sam Shing Estate</span>
+                        </h4>
+                        <p class="text-xs text-stone-500 mt-1 mb-2">
+                            <span class="lang-zh">青山公路-青山灣段 (近三聖邨候車位置)</span>
+                            <span class="lang-en">Castle Peak Road (Near Sam Shing waiting area)</span>
+                        </p>
                         <div class="flex gap-2 flex-wrap">
-                            <span class="payment-method bg-green-50 text-green-700 border border-green-200">接受車票 ($5/$3)</span>
-                            <span class="payment-method bg-stone-100 text-stone-600">八達通 ($7)</span>
+                            <span class="payment-method bg-green-50 text-green-700 border border-green-200">
+                                <span class="lang-zh">車票 ($5/$3)</span><span class="lang-en">Ticket ($5/$3)</span>
+                            </span>
+                            <span class="payment-method bg-stone-100 text-stone-600">
+                                <span class="lang-zh">八達通 ($7)</span><span class="lang-en">Octopus ($7)</span>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -349,115 +474,173 @@
             </div>
         </section>
 
-        <!-- 車票與付款詳情 -->
+        <!-- 車票與付款詳情 Tickets & Fares -->
         <section id="sec-tickets" class="hidden animate-fade-in">
              <div class="bg-white rounded-3xl p-8 shadow-sm border border-stone-100 mb-8">
-                <h3 class="text-xl font-bold mb-6 flex items-center"><span class="mr-2">💰</span> 詳細收費與支付對照</h3>
+                <h3 class="text-xl font-bold mb-6 flex items-center">
+                    <span class="mr-2">💰</span> 
+                    <span class="lang-zh">詳細收費與支付對照</span><span class="lang-en">Detailed Fares & Payment Methods</span>
+                </h3>
                 <div class="overflow-x-auto rounded-2xl border border-stone-200">
                     <table class="w-full text-left border-collapse min-w-[500px]">
                         <thead>
                             <tr class="bg-stone-50 border-b border-stone-200">
-                                <th class="p-4 text-sm font-bold">路段</th>
-                                <th class="p-4 text-sm font-bold text-amber-700">預先購買車票</th>
-                                <th class="p-4 text-sm font-bold text-blue-700">直接拍八達通</th>
+                                <th class="p-4 text-sm font-bold">
+                                    <span class="lang-zh">路段</span><span class="lang-en">Route</span>
+                                </th>
+                                <th class="p-4 text-sm font-bold text-amber-700">
+                                    <span class="lang-zh">預先購買車票</span><span class="lang-en">Pre-purchased Ticket</span>
+                                </th>
+                                <th class="p-4 text-sm font-bold text-blue-700">
+                                    <span class="lang-zh">直接拍八達通</span><span class="lang-en">Direct Octopus Tap</span>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="border-b border-stone-100 hover:bg-stone-50 transition-colors">
-                                <td class="p-4 text-sm font-medium">全程 / 三聖邨</td>
+                                <td class="p-4 text-sm font-medium">
+                                    <span class="lang-zh">全程 / 三聖邨</span><span class="lang-en">Full Route / Sam Shing</span>
+                                </td>
                                 <td class="p-4 text-sm font-black text-lg">$5.0</td>
                                 <td class="p-4 text-sm font-black text-lg">$7.0</td>
                             </tr>
                             <tr class="border-b border-stone-100 hover:bg-stone-50 transition-colors">
-                                <td class="p-4 text-sm font-medium">黃金海岸</td>
+                                <td class="p-4 text-sm font-medium">
+                                    <span class="lang-zh">黃金海岸</span><span class="lang-en">Gold Coast</span>
+                                </td>
                                 <td class="p-4 text-sm font-black text-lg">$5.0</td>
                                 <td class="p-4 text-sm font-black text-lg">$4.5</td>
                             </tr>
                             <tr class="hover:bg-stone-50 transition-colors bg-blue-50/30">
-                                <td class="p-4 text-sm">特惠 <br><span class="text-xs font-normal text-stone-500">(任何站點及方向，包含屯門回程)</span></td>
+                                <td class="p-4 text-sm">
+                                    <span class="lang-zh">特惠</span><span class="lang-en">Concession</span> 
+                                    <br>
+                                    <span class="text-xs font-normal text-stone-500">
+                                        <span class="lang-zh">(任何站點及方向，包含屯門回程)</span><span class="lang-en">(Any stop & direction, incl. return)</span>
+                                    </span>
+                                </td>
                                 <td class="p-4 text-sm font-black text-blue-600 text-lg">$3.0</td>
-                                <td class="p-4 text-sm font-black text-stone-400">不設特惠折扣 <br><span class="text-[9px] font-normal text-stone-400">(按所屬路段成人收費)</span></td>
+                                <td class="p-4 text-sm font-black text-stone-400">
+                                    <span class="lang-zh">不設特惠折扣</span><span class="lang-en">No Concession Discount</span> 
+                                    <br>
+                                    <span class="text-[9px] font-normal text-stone-400">
+                                        <span class="lang-zh">(按所屬路段成人收費)</span><span class="lang-en">(Charged at adult fare)</span>
+                                    </span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <p class="mt-4 text-xs text-red-600 font-bold bg-red-50 p-3 rounded-lg border border-red-100">⚠️ 注意：八達通支付不設長者或學生特惠折扣，建議合資格人士預先購買 $3 特惠車票。車票於去程及回程均適用。</p>
+                <p class="mt-4 text-xs text-red-600 font-bold bg-red-50 p-3 rounded-lg border border-red-100">
+                    <span class="lang-zh">⚠️ 注意：八達通支付不設長者或學生特惠折扣，建議合資格人士預先購買 $3 特惠車票。車票於去程及回程均適用。</span>
+                    <span class="lang-en">⚠️ Note: Octopus payment does not provide senior or student concession discounts. Eligible passengers are advised to pre-purchase the $3 concession ticket.</span>
+                </p>
              </div>
 
             <div class="mb-12">
                 <h2 class="text-2xl font-bold mb-6 text-stone-800 flex items-center">
-                    <span class="mr-2">🎟️</span> 有效車票圖鑑 (2025 及 2026 版)
+                    <span class="mr-2">🎟️</span> 
+                    <span class="lang-zh">有效車票圖鑑 (2025 及 2026 版)</span><span class="lang-en">Valid Ticket Gallery (2025 & 2026 Editions)</span>
                 </h2>
-                <!-- 2026年 新版車票 -->
+                <!-- 2026 -->
                 <div class="mb-8">
-                    <h3 class="text-lg font-bold mb-4 text-green-800 border-b-2 border-green-100 pb-2">🌿 2026年 實體車票 (常規版)</h3>
+                    <h3 class="text-lg font-bold mb-4 text-green-800 border-b-2 border-green-100 pb-2">
+                        <span class="lang-zh">🌿 2026年 實體車票 (常規版)</span><span class="lang-en">🌿 2026 Physical Tickets (Regular)</span>
+                    </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                         <div class="bg-white p-4 rounded-2xl shadow-sm border-t-4 border-green-600 ticket-card group">
                             <div class="flex justify-between items-center mb-3">
                                 <span class="bg-green-100 text-green-800 text-[10px] font-black px-2 py-0.5 rounded">2026 NEW</span>
-                                <span class="text-xs font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded-full">$5 成人</span>
+                                <span class="text-xs font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded-full">
+                                    <span class="lang-zh">$5 成人</span><span class="lang-en">$5 Adult</span>
+                                </span>
                             </div>
                             <div class="bg-stone-50 h-48 rounded-lg flex items-center justify-center border border-stone-200 mb-3 relative overflow-hidden">
-                                <img src="ticket_adult.JPG" alt="2026成人車票" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" class="absolute inset-0 w-full h-full object-contain p-1 transition-transform duration-500 group-hover:scale-110">
+                                <img src="ticket_adult.JPG" alt="2026 Adult Ticket" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" class="absolute inset-0 w-full h-full object-contain p-1 transition-transform duration-500 group-hover:scale-110">
                                 <div class="hidden absolute inset-0 bg-stone-100 flex-col items-center justify-center text-xs text-stone-400 italic text-center p-2">
-                                    請將成人票命名為<br><b>ticket_adult.png</b>
+                                    <span class="lang-zh">請將成人票命名為<br><b>ticket_adult.png</b></span>
+                                    <span class="lang-en">Please name adult ticket as<br><b>ticket_adult.png</b></span>
                                 </div>
                             </div>
-                            <p class="text-sm font-bold text-stone-800">2026年 成人單程票</p>
+                            <p class="text-sm font-bold text-stone-800">
+                                <span class="lang-zh">2026年 成人單程票</span><span class="lang-en">2026 Adult Single Ticket</span>
+                            </p>
                         </div>
                         <div class="bg-white p-4 rounded-2xl shadow-sm border-t-4 border-blue-500 ticket-card group">
                             <div class="flex justify-between items-center mb-3">
                                 <span class="bg-blue-100 text-blue-800 text-[10px] font-black px-2 py-0.5 rounded">2026 NEW</span>
-                                <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">$3 特惠</span>
+                                <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">
+                                    <span class="lang-zh">$3 特惠</span><span class="lang-en">$3 Concession</span>
+                                </span>
                             </div>
                             <div class="bg-stone-50 h-48 rounded-lg flex items-center justify-center border border-stone-200 mb-3 relative overflow-hidden">
-                                <img src="ticket_concession.JPG" alt="2026特惠車票" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" class="absolute inset-0 w-full h-full object-contain p-1 transition-transform duration-500 group-hover:scale-110">
+                                <img src="ticket_concession.JPG" alt="2026 Concession Ticket" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" class="absolute inset-0 w-full h-full object-contain p-1 transition-transform duration-500 group-hover:scale-110">
                                 <div class="hidden absolute inset-0 bg-stone-100 flex-col items-center justify-center text-xs text-stone-400 italic text-center p-2">
-                                    請將特惠票命名為<br><b>ticket_concession.png</b>
+                                    <span class="lang-zh">請將特惠票命名為<br><b>ticket_concession.png</b></span>
+                                    <span class="lang-en">Please name concession ticket as<br><b>ticket_concession.png</b></span>
                                 </div>
                             </div>
-                            <p class="text-sm font-bold text-stone-800">2026年 特惠單程票</p>
+                            <p class="text-sm font-bold text-stone-800">
+                                <span class="lang-zh">2026年 特惠單程票</span><span class="lang-en">2026 Concession Single Ticket</span>
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2025年 過渡期車票 -->
+                <!-- 2025 -->
                 <div>
-                    <h3 class="text-lg font-bold mb-4 text-amber-800 border-b-2 border-amber-100 pb-2">⏳ 2025年 過渡期車票 (仍可使用)</h3>
-                    <p class="text-xs text-stone-500 mb-4">印有面值調整 ($7→$5 及 $7→$3) 的車票，於票務過渡期內仍然有效。</p>
+                    <h3 class="text-lg font-bold mb-4 text-amber-800 border-b-2 border-amber-100 pb-2">
+                        <span class="lang-zh">⏳ 2025年 過渡期車票 (仍可使用)</span>
+                        <span class="lang-en">⏳ 2025 Transitional Tickets (Valid)</span>
+                    </h3>
+                    <p class="text-xs text-stone-500 mb-4">
+                        <span class="lang-zh">印有面值調整 ($7→$5 及 $7→$3) 的車票，於票務過渡期內仍然有效。</span>
+                        <span class="lang-en">Tickets with adjusted face values ($7→$5 and $7→$3) remain valid during the transition period.</span>
+                    </p>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                         <div class="bg-white p-4 rounded-2xl shadow-sm border-t-4 border-emerald-600 ticket-card group">
                             <div class="bg-stone-50 h-48 rounded-lg flex items-center justify-center border border-stone-200 mb-3 relative overflow-hidden">
-                                <img src="1000095770.JPG" alt="2025成人過渡車票" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" class="absolute inset-0 w-full h-full object-cover p-1 transition-transform duration-500 group-hover:scale-110">
+                                <img src="1000095770.JPG" alt="2025 Adult Transitional Ticket" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" class="absolute inset-0 w-full h-full object-cover p-1 transition-transform duration-500 group-hover:scale-110">
                                 <div class="hidden absolute inset-0 bg-stone-100 flex-col items-center justify-center text-xs text-stone-400 italic text-center p-2">
-                                    請確認檔名為<br><b>1000095770.jpg</b>
+                                    <span class="lang-zh">請確認檔名為<br><b>1000095770.jpg</b></span>
+                                    <span class="lang-en">Ensure filename is<br><b>1000095770.jpg</b></span>
                                 </div>
                             </div>
-                            <p class="text-sm font-bold text-stone-800">2025年 成人過渡票 ($7→$5)</p>
+                            <p class="text-sm font-bold text-stone-800">
+                                <span class="lang-zh">2025年 成人過渡票 ($7→$5)</span><span class="lang-en">2025 Adult Transitional Ticket ($7→$5)</span>
+                            </p>
                         </div>
                         <div class="bg-white p-4 rounded-2xl shadow-sm border-t-4 border-cyan-500 ticket-card group">
                             <div class="bg-stone-50 h-48 rounded-lg flex items-center justify-center border border-stone-200 mb-3 relative overflow-hidden">
-                                <img src="1000095769.JPG" alt="2025特惠過渡車票" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" class="absolute inset-0 w-full h-full object-cover p-1 transition-transform duration-500 group-hover:scale-110">
+                                <img src="1000095769.JPG" alt="2025 Concession Transitional Ticket" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" class="absolute inset-0 w-full h-full object-cover p-1 transition-transform duration-500 group-hover:scale-110">
                                 <div class="hidden absolute inset-0 bg-stone-100 flex-col items-center justify-center text-xs text-stone-400 italic text-center p-2">
-                                    請確認檔名為<br><b>1000095769.jpg</b>
+                                    <span class="lang-zh">請確認檔名為<br><b>1000095769.jpg</b></span>
+                                    <span class="lang-en">Ensure filename is<br><b>1000095769.jpg</b></span>
                                 </div>
                             </div>
-                            <p class="text-sm font-bold text-stone-800">2025年 特惠過渡票 ($7→$3)</p>
+                            <p class="text-sm font-bold text-stone-800">
+                                <span class="lang-zh">2025年 特惠過渡票 ($7→$3)</span><span class="lang-en">2025 Concession Transitional Ticket ($7→$3)</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- 計算機 -->
+            <!-- Calculator -->
             <div class="bg-white rounded-3xl p-8 shadow-sm border border-stone-100">
-                <h2 class="text-2xl font-bold mb-4 text-stone-800">車票購買計算機</h2>
-                <!-- Calculator structure -->
+                <h2 class="text-2xl font-bold mb-4 text-stone-800">
+                    <span class="lang-zh">車票購買計算機</span><span class="lang-en">Ticket Calculator</span>
+                </h2>
                 <div class="flex flex-col lg:flex-row gap-12">
                     <div class="flex-grow space-y-8">
                         <div class="flex items-center justify-between p-4 bg-green-50 rounded-2xl border border-green-100">
                             <div>
-                                <h4 class="font-bold text-green-900 text-lg">成人單程票</h4>
-                                <p class="text-sm text-green-700 font-mono mt-1">每程 $5.00</p>
+                                <h4 class="font-bold text-green-900 text-lg">
+                                    <span class="lang-zh">成人單程票</span><span class="lang-en">Adult Ticket</span>
+                                </h4>
+                                <p class="text-sm text-green-700 font-mono mt-1">
+                                    <span class="lang-zh">每程 $5.00</span><span class="lang-en">$5.00 per trip</span>
+                                </p>
                             </div>
                             <div class="flex items-center space-x-4 md:space-x-6">
                                 <button onclick="updateQty('adult', -1)" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center font-black text-green-700 text-xl">-</button>
@@ -467,8 +650,12 @@
                         </div>
                         <div class="flex items-center justify-between p-4 bg-blue-50 rounded-2xl border border-blue-100">
                             <div>
-                                <h4 class="font-bold text-blue-900 text-lg">特惠單程票</h4>
-                                <p class="text-sm text-blue-700 font-mono mt-1">每程 $3.00</p>
+                                <h4 class="font-bold text-blue-900 text-lg">
+                                    <span class="lang-zh">特惠單程票</span><span class="lang-en">Concession Ticket</span>
+                                </h4>
+                                <p class="text-sm text-blue-700 font-mono mt-1">
+                                    <span class="lang-zh">每程 $3.00</span><span class="lang-en">$3.00 per trip</span>
+                                </p>
                             </div>
                             <div class="flex items-center space-x-4 md:space-x-6">
                                 <button onclick="updateQty('con', -1)" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center font-black text-blue-700 text-xl">-</button>
@@ -484,68 +671,88 @@
                         </div>
                         <div class="mt-8 space-y-3">
                             <div class="flex justify-between text-sm text-stone-300 border-b border-stone-700 pb-2">
-                                <span>成人車票 x <span id="rec-adult">0</span></span><span>$<span id="sum-adult">0</span></span>
+                                <span><span class="lang-zh">成人車票</span><span class="lang-en">Adult</span> x <span id="rec-adult">0</span></span><span>$<span id="sum-adult">0</span></span>
                             </div>
                             <div class="flex justify-between text-sm text-stone-300 border-b border-stone-700 pb-2">
-                                <span>特惠車票 x <span id="rec-con">0</span></span><span>$<span id="sum-con">0</span></span>
+                                <span><span class="lang-zh">特惠車票</span><span class="lang-en">Concession</span> x <span id="rec-con">0</span></span><span>$<span id="sum-con">0</span></span>
                             </div>
-                            <button onclick="resetCalc()" class="w-full py-3 mt-4 bg-stone-700 rounded-xl text-sm font-bold">重新計算</button>
+                            <button onclick="resetCalc()" class="w-full py-3 mt-4 bg-stone-700 rounded-xl text-sm font-bold hover:bg-stone-600 transition">
+                                <span class="lang-zh">重新計算</span><span class="lang-en">Recalculate</span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-         <!-- 乘客守則 -->
+         <!-- 乘客守則 Passenger Rules -->
         <section id="sec-rules" class="hidden animate-fade-in">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-stone-800">注意事項及乘客守則</h2>
-                <p class="text-stone-500 mt-2">為保障各乘客的利益及行車安全，敬請留意並遵守以下守則：</p>
+                <h2 class="text-3xl font-bold text-stone-800">
+                    <span class="lang-zh">注意事項及乘客守則</span><span class="lang-en">Passenger Rules</span>
+                </h2>
+                <p class="text-stone-500 mt-2">
+                    <span class="lang-zh">為保障各乘客的利益及行車安全，敬請留意並遵守以下守則：</span>
+                    <span class="lang-en">To ensure the interest and safety of all passengers, please observe the following rules:</span>
+                </p>
             </div>
             
             <div class="space-y-6">
-                <!-- 服務對象 (運輸署規定) -->
+                <!-- Service Eligibility -->
                 <div class="bg-white rounded-3xl p-8 shadow-sm border border-l-8 border-l-red-600 border-stone-100">
-                    <h3 class="text-xl font-bold mb-3 flex items-center text-red-800"><span class="mr-2">🛑</span> 服務對象限制 (運輸署法例規定)</h3>
+                    <h3 class="text-xl font-bold mb-3 flex items-center text-red-800"><span class="mr-2">🛑</span> 
+                        <span class="lang-zh">服務對象限制 (運輸署法例規定)</span>
+                        <span class="lang-en">Service Eligibility (Transport Dept Rules)</span>
+                    </h3>
                     <p class="text-stone-600 leading-relaxed">
-                        根據香港運輸署發出之客運營業證條款，本屋苑穿梭巴士屬「居民服務」（Residents' Service）性質。<strong>本服務僅限接載 NAPA 居民、其訪客及屋苑工作人員。</strong>
+                        <span class="lang-zh">根據香港運輸署發出之客運營業證條款，本屋苑穿梭巴士屬「居民服務」（Residents' Service）性質。<strong>本服務僅限接載 NAPA 居民、其訪客及屋苑工作人員。</strong></span>
+                        <span class="lang-en">According to the Passenger Service Licence issued by the HK Transport Department, this operates as a "Residents' Service". <strong>This service is exclusively for NAPA residents, their visitors, and estate staff.</strong></span>
                     </p>
                     <p class="text-stone-600 leading-relaxed mt-2">
-                        司機及車站管理人員有權要求乘客在上車前出示有效的<strong>住戶證、八達通住戶憑證</strong>或其他相關證明文件。若未能出示，工作人員有權拒絕接載。
+                        <span class="lang-zh">司機及車站管理人員有權要求乘客在上車前出示有效的<strong>住戶證、八達通住戶憑證</strong>或其他相關證明文件。若未能出示，工作人員有權拒絕接載。</span>
+                        <span class="lang-en">Drivers and station staff reserve the right to ask passengers to present a valid <strong>Resident Card or Octopus Resident Pass</strong>. If unable to provide proof, staff may refuse boarding.</span>
                     </p>
                 </div>
 
-                <!-- 車廂規則 Grid -->
+                <!-- Rules Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-white rounded-3xl p-6 shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
-                        <h4 class="font-bold text-stone-800 mb-3 flex items-center text-lg"><span class="mr-2">🎟️</span> 繳付車資</h4>
+                        <h4 class="font-bold text-stone-800 mb-3 flex items-center text-lg"><span class="mr-2">🎟️</span> 
+                            <span class="lang-zh">繳付車資</span><span class="lang-en">Fare Payment</span>
+                        </h4>
                         <ul class="text-sm text-stone-600 space-y-2 list-disc list-inside">
-                            <li>請於上車時繳付車資（將實體車票投入錢箱或使用八達通拍卡）。</li>
-                            <li><strong>$5成人及$3特惠車票適用於所有站點及行車方向</strong>（包括由屯門 V city 返回 NAPA）。</li>
-                            <li>車廂內不設找續，請自備輔幣或於客戶服務中心預先購買車票。</li>
+                            <li><span class="lang-zh">請於上車時繳付車資（將實體車票投入錢箱或使用八達通拍卡）。</span><span class="lang-en">Please pay the fare upon boarding (drop the physical ticket or tap Octopus).</span></li>
+                            <li><span class="lang-zh"><strong>$5成人及$3特惠車票適用於所有站點及行車方向</strong>（包括由屯門 V city 返回 NAPA）。</span><span class="lang-en"><strong>$5 Adult and $3 Concession tickets are applicable for all stops and directions</strong> (including the return trip from V city).</span></li>
+                            <li><span class="lang-zh">車廂內不設找續，請自備輔幣或預先購買車票。</span><span class="lang-en">No exact change is provided on board. Please prepare coins or pre-purchase tickets.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-3xl p-6 shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
-                        <h4 class="font-bold text-stone-800 mb-3 flex items-center text-lg"><span class="mr-2">💺</span> 行車安全</h4>
+                        <h4 class="font-bold text-stone-800 mb-3 flex items-center text-lg"><span class="mr-2">💺</span> 
+                            <span class="lang-zh">行車安全</span><span class="lang-en">Ride Safety</span>
+                        </h4>
                         <ul class="text-sm text-stone-600 space-y-2 list-disc list-inside">
-                            <li>當巴士行駛時，所有乘客必須安坐。如座位設有安全帶，必須依法佩戴。</li>
-                            <li>請勿在車廂內走動或與司機閒談，以免影響行車安全。</li>
-                            <li>巴士滿載時（不設企位），司機有權拒絕候車人士上車，敬請等候下一班車。</li>
+                            <li><span class="lang-zh">當巴士行駛時，所有乘客必須安坐。如座位設有安全帶，必須依法佩戴。</span><span class="lang-en">All passengers must remain seated while the bus is moving. Wear seatbelts if provided.</span></li>
+                            <li><span class="lang-zh">請勿在車廂內走動或與司機閒談，以免影響行車安全。</span><span class="lang-en">Do not walk around the cabin or chat with the driver to ensure driving safety.</span></li>
+                            <li><span class="lang-zh">巴士滿載時（不設企位），司機有權拒絕候車人士上車，敬請等候下一班車。</span><span class="lang-en">When the bus is full (no standing allowed), the driver has the right to refuse boarding.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-3xl p-6 shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
-                        <h4 class="font-bold text-stone-800 mb-3 flex items-center text-lg"><span class="mr-2">🍔</span> 車廂衛生</h4>
+                        <h4 class="font-bold text-stone-800 mb-3 flex items-center text-lg"><span class="mr-2">🍔</span> 
+                            <span class="lang-zh">車廂衛生</span><span class="lang-en">Cabin Hygiene</span>
+                        </h4>
                         <ul class="text-sm text-stone-600 space-y-2 list-disc list-inside">
-                            <li>車廂內嚴禁飲食、吸煙（包括電子煙）。</li>
-                            <li>請保持車廂清潔，切勿亂拋垃圾或弄污座位。</li>
-                            <li>請勿攜帶散發強烈氣味之物品上車，以免影響其他乘客。</li>
+                            <li><span class="lang-zh">車廂內嚴禁飲食、吸煙（包括電子煙）。</span><span class="lang-en">Eating, drinking, and smoking (including e-cigarettes) are strictly prohibited.</span></li>
+                            <li><span class="lang-zh">請保持車廂清潔，切勿亂拋垃圾或弄污座位。</span><span class="lang-en">Please keep the cabin clean. Do not litter or soil the seats.</span></li>
+                            <li><span class="lang-zh">請勿攜帶散發強烈氣味之物品上車，以免影響其他乘客。</span><span class="lang-en">Do not bring items with strong odors on board to avoid affecting others.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-3xl p-6 shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
-                        <h4 class="font-bold text-stone-800 mb-3 flex items-center text-lg"><span class="mr-2">🧳</span> 物品及寵物</h4>
+                        <h4 class="font-bold text-stone-800 mb-3 flex items-center text-lg"><span class="mr-2">🧳</span> 
+                            <span class="lang-zh">物品及寵物</span><span class="lang-en">Luggage & Pets</span>
+                        </h4>
                         <ul class="text-sm text-stone-600 space-y-2 list-disc list-inside">
-                            <li>請勿攜帶體積過大之行李或危險品上車，以免阻礙通道。</li>
-                            <li>除陪同視障人士之導盲犬外，攜帶寵物上車必須遵守屋苑的相關指引（如需將寵物置於寵物袋/車內，且不可佔用座位），以免滋擾他人。</li>
+                            <li><span class="lang-zh">請勿攜帶體積過大之行李或危險品上車，以免阻礙通道。</span><span class="lang-en">Do not bring bulky luggage or dangerous goods on board to avoid obstructing aisles.</span></li>
+                            <li><span class="lang-zh">除陪同視障人士之導盲犬外，攜帶寵物上車必須遵守屋苑的相關指引，以免滋擾他人。</span><span class="lang-en">Except for guide dogs, bringing pets on board must comply with the estate's guidelines.</span></li>
                         </ul>
                     </div>
                 </div>
@@ -557,16 +764,33 @@
     <footer class="bg-white border-t border-stone-100 py-8">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex flex-col justify-center items-center gap-2 text-center">
-                <p class="font-bold text-stone-800">NAPA 穿梭巴士資訊站</p>
-                <p class="text-xs text-stone-400">© 2026 NAPA 客戶服務中心. 保留一切權利.</p>
+                <p class="font-bold text-stone-800">
+                    <span class="lang-zh">NAPA 穿梭巴士資訊站</span><span class="lang-en">NAPA Shuttle Bus Info</span>
+                </p>
+                <p class="text-xs text-stone-400">
+                    <span class="lang-zh">© 2026 NAPA 客戶服務中心. 保留一切權利.</span>
+                    <span class="lang-en">© 2026 NAPA Customer Service Centre. All Rights Reserved.</span>
+                </p>
             </div>
         </div>
     </footer>
 
     <script>
-        // === 1. 計算機邏輯 ===
-        const state = { adult: 0, con: 0 };
+        // === 0. 語言切換邏輯 Language Toggle Logic ===
+        function toggleLanguage() {
+            const html = document.documentElement;
+            // Switch lang attribute
+            html.lang = (html.lang === 'zh-HK') ? 'en' : 'zh-HK';
+            // Force re-run board update to refresh javascript-injected text
+            updateLiveBoard(); 
+        }
 
+        function isZh() {
+            return document.documentElement.lang === 'zh-HK';
+        }
+
+        // === 1. 計算機邏輯 Calculator Logic ===
+        const state = { adult: 0, con: 0 };
         function updateQty(type, val) {
             state[type] = Math.max(0, state[type] + val);
             render();
@@ -593,7 +817,7 @@
             render();
         }
 
-        // === 2. 分頁切換邏輯 ===
+        // === 2. 分頁切換邏輯 Tab Switch Logic ===
         function switchTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
@@ -601,13 +825,12 @@
             document.getElementById(`tab-${tabId}`).classList.add('active');
             document.getElementById(`sec-${tabId}`).classList.remove('hidden');
             
-            // 如果不是在概覽頁面，滾動到頂部
             if(tabId !== 'overview') {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
-        // === 3. 實時站頭下一班車邏輯 ===
+        // === 3. 實時站頭看板 Live Board Logic ===
         const SCHEDULES = {
             weekday: {
                 toVcity: ["06:35", "07:05", "07:35", "08:05", "08:35", "09:05", "09:45", "10:15", "10:45", "11:15", "11:45", "12:15", "12:45", "13:15", "13:45", "14:15", "14:45", "15:15", "15:45", "16:15", "16:45", "17:15", "17:45", "18:15", "18:45", "19:15", "19:45", "20:15", "20:45", "21:15", "21:45"],
@@ -625,25 +848,32 @@
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
             const currentTimeStr = `${hours}:${minutes}`;
-            
-            // 更新時鐘
+
             const clockEl = document.getElementById('live-clock');
             if (clockEl) clockEl.innerText = `${hours}:${minutes}:${seconds}`;
 
-            // 判斷平日或假日
             const isWeekend = now.getDay() === 0 || now.getDay() === 6;
             const todaySchedules = isWeekend ? SCHEDULES.weekend : SCHEDULES.weekday;
             
             const boardTypeEl = document.getElementById('board-type');
             if (boardTypeEl) {
-                boardTypeEl.innerText = isWeekend ? "假日班次執行中" : "平日班次執行中";
-                boardTypeEl.className = isWeekend ? "ml-3 text-xs bg-red-500/80 text-white px-2 py-1 rounded" : "ml-3 text-xs bg-green-500/80 text-white px-2 py-1 rounded";
+                if(isWeekend) {
+                    boardTypeEl.innerText = isZh() ? "假日班次執行中" : "Weekend Schedule";
+                    boardTypeEl.className = "ml-3 text-xs bg-red-500/80 text-white px-2 py-1 rounded";
+                } else {
+                    boardTypeEl.innerText = isZh() ? "平日班次執行中" : "Weekday Schedule";
+                    boardTypeEl.className = "ml-3 text-xs bg-green-500/80 text-white px-2 py-1 rounded";
+                }
             }
 
-            // 尋找下一班車函數
             function findNextBus(list) {
                 const next = list.find(time => time > currentTimeStr);
-                if (!next) return { time: "今日完結", countdown: "請等候明日頭班車" };
+                if (!next) {
+                    return { 
+                        time: isZh() ? "今日完結" : "Ended", 
+                        countdown: isZh() ? "請等候明日頭班車" : "Wait for tomorrow's first bus"
+                    };
+                }
                 
                 const [targetH, targetM] = next.split(':').map(Number);
                 const targetDate = new Date();
@@ -653,16 +883,19 @@
                 const diffMins = Math.floor(diffMs / 60000);
                 const diffSecs = Math.floor((diffMs % 60000) / 1000);
                 
-                return { 
-                    time: next, 
-                    countdown: diffMins > 0 ? `約 ${diffMins} 分 ${diffSecs} 秒後開出` : `即將開出 (${diffSecs}s)`
-                };
+                let countdownStr = "";
+                if(diffMins > 0) {
+                    countdownStr = isZh() ? `約 ${diffMins} 分 ${diffSecs} 秒後開出` : `Departs in ${diffMins}m ${diffSecs}s`;
+                } else {
+                    countdownStr = isZh() ? `即將開出 (${diffSecs}s)` : `Departing soon (${diffSecs}s)`;
+                }
+
+                return { time: next, countdown: countdownStr };
             }
 
             const napaStatus = findNextBus(todaySchedules.toVcity);
             const vcityStatus = findNextBus(todaySchedules.toNapa);
 
-            // 更新 DOM
             const napaTimeEl = document.getElementById('next-napa-time');
             if (napaTimeEl) {
                 napaTimeEl.innerText = napaStatus.time;
@@ -672,7 +905,6 @@
             }
         }
 
-        // 初始化
         setInterval(updateLiveBoard, 1000);
         updateLiveBoard();
         switchTab('overview');
@@ -680,5 +912,6 @@
     </script>
 </body>
 </html>
+
 
 
